@@ -38,6 +38,7 @@ export default {
 <style>
 body{
   max-height: 100%;
+  margin: 0;
 }
 
 #main {
@@ -52,5 +53,10 @@ body{
   display: grid;
   grid-template-columns: 50% 50%;
   max-height: 100%;
+}
+
+textarea{
+  width: 97%;
+  height: 100%;
 }
 </style>
