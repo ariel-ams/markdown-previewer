@@ -1,19 +1,25 @@
 <template>
   <div id="main">
-    <textarea name="editor" id="editor" cols="30" rows="10" v-model="markdown"></textarea>
+    <Ventana :title="'Editor'">
+      <textarea name="editor" id="editor" v-model="markdown"></textarea>
+    </Ventana>
 
-    <MarkdownPreview :markdown="markdown"></MarkdownPreview>
+    <Ventana :title="'Preview'">
+      <MarkdownPreview :markdown="markdown"></MarkdownPreview>
+    </Ventana>
   </div>
 </template>
 
 <script>
 import MarkdownPreview from "./components/markdown-preview";
+import Ventana from "./components/ventana";
 import axios from "axios";
 
 export default {
   name: 'App',
   components: {
-    MarkdownPreview
+    MarkdownPreview,
+    Ventana
   },
   data(){
     return {
@@ -30,23 +36,21 @@ export default {
 </script>
 
 <style>
+body{
+  max-height: 100%;
+}
+
 #main {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #2c3e50;
 }
 
 #main {
+  width: 100%;
   display: grid;
   grid-template-columns: 50% 50%;
   max-height: 100%;
-  overflow: scroll;
-}
-
-#main textarea{
-  max-height: 100%;
-  overflow: scroll;
 }
 </style>

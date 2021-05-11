@@ -1,5 +1,5 @@
 <template>
-    <div v-html="parsedHtml"></div>
+    <div id="preview" v-html="parsedHtml"></div>
 </template>
 
 <script>
@@ -22,5 +22,7 @@ export default {
 </script>
 
 <style>
-
+code {
+    overflow-x: scroll;
+}
 </style>
