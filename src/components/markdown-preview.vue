@@ -4,20 +4,19 @@
 
 <script>
 import marked from "marked";
+import EventBus from '../event-bus';
 
 export default {
-    props:{
-        markdown:{
-            type: String,
-            require:true,
-            default: ''
+    data(){
+        return {
+            parsedHtml: ''
         }
     },
-    computed:{
-        parsedHtml(){
-            return marked(this.markdown);
-        }
-  }
+    created(){
+        EventBus.$on('parse-markdown', (markdown) => {
+            this.parsedHtml = marked(markdown);
+        });
+    }
 }
 </script>
 

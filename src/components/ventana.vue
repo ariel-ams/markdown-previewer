@@ -1,6 +1,6 @@
 <template>
   <div class="ventana">
-      <h1>{{title}}</h1>
+      <h1>{{title}} <slot name="titleButton"></slot> </h1>
       <slot>Default footer</slot>
   </div>
 </template>

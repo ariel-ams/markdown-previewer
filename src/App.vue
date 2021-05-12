@@ -1,11 +1,12 @@
 <template>
   <div id="main">
     <Ventana :title="'Editor'">
-      <textarea name="editor" id="editor" v-model="markdown"></textarea>
+      <template v-slot:titleButton><button @click="setMarkdown">Convert</button></template>
+      <textarea name="editor" id="editor" v-model="editorMarkdown"></textarea>
     </Ventana>
 
     <Ventana :title="'Preview'">
-      <MarkdownPreview :markdown="markdown"></MarkdownPreview>
+      <MarkdownPreview ></MarkdownPreview>
     </Ventana>
   </div>
 </template>
@@ -14,6 +15,7 @@
 import MarkdownPreview from "./components/markdown-preview";
 import Ventana from "./components/ventana";
 import axios from "axios";
+import EventBus from './event-bus';
 
 export default {
   name: 'App',
@@ -23,14 +25,20 @@ export default {
   },
   data(){
     return {
-      markdown: ''
+      markdown: '',
+      editorMarkdown: ''
     }
   },
   mounted(){
     axios.get('https://gist.githubusercontent.com/cuonggt/9b7d08a597b167299f0d/raw/c872b3fb5f851d00fba18dfbd456179319a3e9fe/markdown_guide.md')
       .then(response => {
-        this.markdown = response.data;
+        this.editorMarkdown = response.data;
       })
+  },
+  methods:{
+    setMarkdown(){
+      EventBus.$emit('parse-markdown', this.editorMarkdown);
+    }
   }
 }
 </script>
